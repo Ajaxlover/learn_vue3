@@ -11,9 +11,19 @@
 </template>
 
 <script>
-import { reactive, ref } from "vue";
+import { reactive, ref, onMounted, onUpdated, onUnmounted } from "vue";
 export default {
   setup() {
+    onMounted(() => {
+      console.log("mounted!");
+    });
+    onUpdated(() => {
+      console.log("updated!");
+    });
+    onUnmounted(() => {
+      console.log("unmounted!");
+    });
+
     // const { ctx } = getCurrentInstance();
     const info = reactive({
       name: "yangyaun",
