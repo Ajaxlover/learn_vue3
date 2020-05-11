@@ -1,12 +1,48 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      {{ info.name }}----{{ info.age }}
+      <router-link to="/">Home</router-link>
       <router-link to="/about">About</router-link>
+      <router-link to="/test">Test</router-link>
     </div>
     <router-view />
   </div>
 </template>
+
+<script>
+import { reactive, ref } from "vue";
+export default {
+  setup() {
+    // const { ctx } = getCurrentInstance();
+    const info = reactive({
+      name: "yangyaun",
+      age: 18,
+      sex: 1
+    });
+    console.log("我是setup");
+    const count = ref(0);
+    const add = () => {
+      count.value += 1;
+    };
+    console.log(count.value);
+    return { info, add };
+    // ctx.$router.push("/test");
+  },
+  beforeCreate() {
+    console.log("beforeCreat");
+  },
+  created() {
+    console.log("created");
+  },
+  beforeMount() {
+    console.log("beforeMount");
+  },
+  mounted() {
+    console.log("444444444");
+  }
+};
+</script>
 
 <style lang="less">
 #app {
