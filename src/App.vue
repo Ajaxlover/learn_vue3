@@ -1,17 +1,25 @@
 <template>
   <div id="app">
     <div id="nav">
-      {{ info.name }}----{{ info.age }}
+      {{ info.name }}----{{ info.age }}---{{ count }}
       <router-link to="/">Home</router-link>
       <router-link to="/about">About</router-link>
       <router-link to="/test">Test</router-link>
+      <button @click="add">点我+1</button>
     </div>
     <router-view />
   </div>
 </template>
 
 <script>
-import { reactive, ref, onMounted, onUpdated, onUnmounted } from "vue";
+import {
+  reactive,
+  ref,
+  onMounted,
+  onUpdated,
+  onUnmounted,
+  getCurrentInstance
+} from "vue";
 export default {
   setup() {
     onMounted(() => {
@@ -24,7 +32,7 @@ export default {
       console.log("unmounted!");
     });
 
-    // const { ctx } = getCurrentInstance();
+    const { ctx } = getCurrentInstance();
     const info = reactive({
       name: "yangyaun",
       age: 18,
@@ -34,22 +42,12 @@ export default {
     const count = ref(0);
     const add = () => {
       count.value += 1;
+      info.age += 1;
+      ctx.$router.push("/test");
     };
     console.log(count.value);
-    return { info, add };
-    // ctx.$router.push("/test");
-  },
-  beforeCreate() {
-    console.log("beforeCreat");
-  },
-  created() {
-    console.log("created");
-  },
-  beforeMount() {
-    console.log("beforeMount");
-  },
-  mounted() {
-    console.log("444444444");
+
+    return { info, add, count };
   }
 };
 </script>
