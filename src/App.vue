@@ -1,3 +1,4 @@
+/* eslint-disable */
 <template>
   <div id="app">
     <div id="nav">
@@ -15,8 +16,10 @@
 </template>
 
 <script>
-import { reactive, ref, onMounted, onUpdated, onUnmounted,getCurrentInstance} from "vue";
+import { reactive, ref, onMounted, onUpdated, onUnmounted } from "vue";
+import { getCurrentInstance } from "vue";
 import { useStore } from "vuex";
+// import { useRouter } from "vue-router";
 export default {
   setup() {
     const store = useStore();
@@ -31,7 +34,10 @@ export default {
       console.log("unmounted!");
     });
 
+    // const Router = useRouter();
+    // const Route = useRoute();
     const { ctx } = getCurrentInstance();
+    // console.log(ctx);
     const info = reactive({
       name: "yangyaun",
       age: 18,
@@ -43,6 +49,7 @@ export default {
       count.value += 1;
       info.age += 1;
       store.state.countNum += 1;
+      // Router.push("/test");
       ctx.$router.push("/test");
     };
     console.log(count.value);
