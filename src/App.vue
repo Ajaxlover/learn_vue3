@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <div id="nav">
-      {{ info.name }}----{{ info.age }}---{{ count }}
+      {{ info.name }}----{{ info.age }}---{{ count }}----{{
+        store.state.countNum
+      }}
+      <input v-model="store.state.countNum" type="number" />
       <router-link to="/">Home</router-link>
       <router-link to="/about">About</router-link>
       <router-link to="/test">Test</router-link>
@@ -12,18 +15,14 @@
 </template>
 
 <script>
-import {
-  reactive,
-  ref,
-  onMounted,
-  onUpdated,
-  onUnmounted,
-  getCurrentInstance
-} from "vue";
+import { reactive, ref, onMounted, onUpdated, onUnmounted,getCurrentInstance} from "vue";
+import { useStore } from "vuex";
 export default {
   setup() {
+    const store = useStore();
     onMounted(() => {
       console.log("mounted!");
+      console.log(store.state);
     });
     onUpdated(() => {
       console.log("updated!");
@@ -43,11 +42,12 @@ export default {
     const add = () => {
       count.value += 1;
       info.age += 1;
+      store.state.countNum += 1;
       ctx.$router.push("/test");
     };
     console.log(count.value);
 
-    return { info, add, count };
+    return { info, add, count, store };
   }
 };
 </script>
