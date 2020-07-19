@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    helloworld页面
+    我是Home 的子组件,接受Home组件的传值为{{ msg }}
   </div>
 </template>
 

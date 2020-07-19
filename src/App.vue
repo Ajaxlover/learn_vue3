@@ -1,10 +1,7 @@
-/* eslint-disable */
 <template>
   <div id="app">
     <div id="nav">
-      {{ info.name }}----{{ info.age }}---{{ count }}----{{
-        store.state.countNum
-      }}
+      {{ name }}----{{ age }}---{{ count }}----{{ store.state.countNum }}
       <input v-model="store.state.countNum" type="number" />
       <router-link to="/">Home</router-link>
       <router-link to="/about">About</router-link>
@@ -12,15 +9,20 @@
       <button @click="add">点我+1</button>
     </div>
     <router-view />
+    <!-- <HelloWorld /> -->
   </div>
 </template>
 
 <script>
-import { reactive, ref, onMounted, onUpdated, onUnmounted } from "vue";
+import { reactive, ref, onMounted, onUpdated, onUnmounted, toRefs } from "vue";
 import { getCurrentInstance } from "vue";
 import { useStore } from "vuex";
+// import HelloWorld from "@/components/HelloWorld";
 // import { useRouter } from "vue-router";
 export default {
+  // components: {
+  //   HelloWorld
+  // },
   setup() {
     const store = useStore();
     onMounted(() => {
@@ -54,7 +56,7 @@ export default {
     };
     console.log(count.value);
 
-    return { info, add, count, store };
+    return { ...toRefs(info), add, count, store };
   }
 };
 </script>
